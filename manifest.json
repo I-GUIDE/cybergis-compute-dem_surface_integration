@@ -1,0 +1,45 @@
+{
+    "name": "DEM_surface_integration Processor",
+    "container": "DEM_surface_integration",
+    "description": "Generate raster from points and intergrate mesh with DEM",
+    "pre_processing_stage": "python3 create_processor_yml.py",
+    "execution_stage": "./main.sh",
+    "post_processing_stage": "./transfer_shared_outputs.sh",
+    "slurm_input_rules": {
+           "time": {
+                "max": 60,
+                "min": 10,
+                "default_value": 10,
+                "step": 10,
+                "unit": "Minutes"   
+            },
+            "cpu_per_task": {
+                "max": 128,
+                "min": 16,
+                "default_value": 16,
+                "step": 16
+            }
+    },
+    "param_rules": {
+        "mesh_file": {
+            "type": "string_input",
+            "require": true,
+            "default_value": "n/a"
+        },
+        "boundary_file": {
+            "type": "string_input",
+            "require": true,
+            "default_value": "n/a"
+        },
+        "dem_file": {
+            "type": "string_input",
+            "require": true,
+            "default_value": "n/a"
+        }
+    },
+    "require_upload_data": true,
+    "supported_hpc": ["anvil_community"],
+    "default_hpc": "anvil_community"
+}
+
+
